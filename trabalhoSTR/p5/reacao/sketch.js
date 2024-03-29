@@ -14,7 +14,6 @@ function setup() {
   startButton = createButton('Iniciar Teste');
   startButton.class('start');
   startButton.position((windowWidth / 2) - 160, windowHeight - 50); // Posição do botão
-  // startButton.mousePressed(startTest); // Define a função que será chamada quando o botão for clicado
 
   // Cria o botão para parar o teste
   stopButton = createButton('Parar Teste');
@@ -25,12 +24,10 @@ function setup() {
   
   document.querySelector('.start').addEventListener("click", function() {
     circlesNumber = parseInt(document.getElementById('numero-circulos').value);
-    //console.log(circlesNumber);
     if (circlesNumber < 1) {
       alert('O número de círculos deve ser maior que 0!');
       return;
     }
-    // console.log(circlesNumber);
     circlesNumbers = circlesNumber;
     startTest();
   });
@@ -99,7 +96,7 @@ function mouseClicked() {
       }
       let clickTime = performance.now(); // Registra o tempo atual em milissegundos com alta precisão
       let elapsedTime = (clickTime - circleCreationTime) / 1000; // Calcula o tempo decorrido em segundos
-      //console.log("Tempo decorrido desde a criação do círculo: " + elapsedTime + " segundos");
+      
       timeReaction += elapsedTime;
       circlesNumber--;
       createCircle(); // Cria um novo círculo
@@ -110,10 +107,6 @@ function mouseClicked() {
 function createCircle() {
   // Define a posição inicial do círculo aleatoriamente dentro do canvas
   if (circlesNumber == 0) {
-    // console.log("Fim do jogo!");
-    // console.log("time reaction: " + timeReaction + " segundos");
-    // console.log("Tempo médio de reação: " + timeReaction / circlesNumbers + " segundos");
-    // console.log("numeros de circulos: " + circlesNumber);
     startButton.removeAttribute('disabled');
     mostrarResultado();
     zeraTeste();
