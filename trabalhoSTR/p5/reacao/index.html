@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>p5.js example</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: rgb(216, 206, 216);
+    }
+
+    h2 {
+      text-align: center;
+      color: rgb(0, 0, 0);
+    }
+
+    .start {
+      display: block;
+      margin: 0 auto;
+      width: 150px;
+      height: 30px;
+      font-weight: bold;
+      background-color: #27AE60;
+      color: rgb(245, 243, 243);
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+      border:0;
+      letter-spacing: 3px;
+    }
+
+    .start:hover {
+      background-color: rgb(34, 158, 81);
+    }
+    .stop {
+      display: block;
+      margin: 0 auto;
+      width: 150px;
+      height: 30px;
+      font-weight: bold;
+      background-color: #C0392B;
+      color: rgb(250, 246, 246);
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+      letter-spacing: 3px;
+    }
+
+    .stop:hover {
+      background-color: rgb(226, 94, 94);
+    }
+
+    .card {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 600px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .display-none{
+      display: none;
+    }
+
+    /* Estilos para o conteúdo do card */
+    .card-content {
+      margin-bottom: 20px;
+    }
+
+    #resultado-texto p{
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .circnum{
+      margin: 20px 0px 0px 30px;
+      background-color: blue;
+      width: 400px;
+      padding: 10px;
+      color: #fff;;
+    }
+
+    .circnum label{
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+  <script src="../p5.min.js"></script>
+  <script src="sketch.js"></script>
+</head>
+
+<body>
+  <main>
+    <h2>SISTEMA DE TEMPO DE REAÇÃO</h2>
+  </main>
+  <div id="resultado-card" class="card hidden">
+    <div class="card-content">
+      <h2>Resultado do Jogo</h2>
+      <p id="resultado-texto"></p>
+    </div>
+  </div>
+  <div class="circnum">
+    <label for="numero-circulos">Número de Círculos:</label>
+    <input type="number" id="numero-circulos" value="10">
+  </div>
+  
+</body>
+
+</html>
