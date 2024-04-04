@@ -6,6 +6,12 @@ let timeReaction = 0;
 let testing = false;
 let startButton, stopButton; // Botões para iniciar e parar o teste
 let circleCreationTime;
+let InitialrandomNumber = Math.random();
+let Initialresultado = Math.floor(InitialrandomNumber * 4) + 1;
+let corAtual = Initialresultado;
+let teclaClicada;
+let contagem;
+const cores = ['red','green','blue','yellow','red'];
 function setup() {
   // put setup code here
   createCanvas(windowWidth, windowHeight - 150);
@@ -13,8 +19,8 @@ function setup() {
   // Cria o botão para iniciar o teste
   startButton = createButton('Iniciar Teste');
   startButton.class('start');
-  startButton.position((windowWidth / 2) - 160, windowHeight - 50); // Posição do botão
-
+  startButton.position((windowWidth / 2) - 150, windowHeight - 50); // Posição do botão
+  
   // Cria o botão para parar o teste
   stopButton = createButton('Parar Teste');
   stopButton.class('stop');
@@ -31,27 +37,77 @@ function setup() {
     circlesNumbers = circlesNumber;
     startTest();
   });
+  
+}
+function keyPressed() {
+  //console.log(key);
+  //['red','green','blue','yellow'];
+  if(key === 'ArrowLeft' && corAtual === 4 && circlesNumber != 0){
+   // console.log('ACERTOU RED');
+    let clickTime = performance.now(); // Registra o tempo atual em milissegundos com alta precisão
+      let elapsedTime = (clickTime - circleCreationTime) / 1000; // Calcula o tempo decorrido em segundos
+      timeReaction += elapsedTime;
+    createCircle();
+  }
+  if(key === 'ArrowRight' && corAtual === 1 && circlesNumber != 0){
+    //console.log('ACERTOU VERDE');
+    let clickTime = performance.now(); // Registra o tempo atual em milissegundos com alta precisão
+      let elapsedTime = (clickTime - circleCreationTime) / 1000; // Calcula o tempo decorrido em segundos
+      
+      timeReaction += elapsedTime;
+    createCircle();
+  }
+  if(key === 'ArrowDown' && corAtual === 2 && circlesNumber != 0){
+    //console.log('ACERTOU AZUL');
+    let clickTime = performance.now(); // Registra o tempo atual em milissegundos com alta precisão
+      let elapsedTime = (clickTime - circleCreationTime) / 1000; // Calcula o tempo decorrido em segundos
+      
+      timeReaction += elapsedTime;
+    createCircle();
+  }
+  if(key === 'ArrowUp' && corAtual === 3 && circlesNumber != 0){
+    //console.log('ACERTOU AMARELO');
+    let clickTime = performance.now(); // Registra o tempo atual em milissegundos com alta precisão
+      let elapsedTime = (clickTime - circleCreationTime) / 1000; // Calcula o tempo decorrido em segundos
+      
+      timeReaction += elapsedTime;
+    createCircle();
+  }
+
+}
+
+function keyReleased() {
+  // Reseta o estado da variável teclaClicada quando a tecla é liberada
+  if (key === 'LEFT_ARROW') {
+    teclaClicada = false;
+  }
 }
 
 function draw() {
+  // console.log(key);
   // put drawing code here
   background(155);
+  ellipse(circleX, circleY, circleSize, circleSize,);
+  fill(cores[corAtual]);
+  //fill(`red`);
 
-  ellipse(circleX, circleY, circleSize, circleSize);
-
+  if(keyIsDown(LEFT_ARROW) && cores[corAtual] == 'green'){
+    //left RED
+    //console.log('acertou');
+  }
   // Verifica se o mouse está dentro do círculo
   let d = dist(mouseX, mouseY, circleX, circleY); // Calcula a distância entre o mouse e o centro do círculo
-  if (d < circleSize / 2) { // Se a distância for menor que o raio do círculo, o mouse está dentro do círculo
-    fill(0, 255, 0); // Define a cor para verde
-  } else {
-    fill(255); // Define a cor para branco
-  }
+  // if (d < circleSize / 2) { // Se a distância for menor que o raio do círculo, o mouse está dentro do círculo
+  //   fill('green'); // Define a cor para verde
+  // } else {
+  //   fill(255); // Define a cor para branco
+  // }
 }
 
 function mostrarResultado() {
   document.getElementById('resultado-card').classList.remove('hidden');
-  let resultadoTexto = `<p>Parabéns! Seu tempo de reação foi  ${timeReaction} segundos!</p>`;
-  resultadoTexto += `<p>Tempo médio de reação: ${timeReaction / circlesNumbers} segundos!</p>`;
+  let resultadoTexto = `<p>Parabéns! Seu tempo de reação foi  ${timeReaction.toFixed(5)} segundos!</p>`;
+  resultadoTexto += `<p>Tempo médio de reação: ${(timeReaction / circlesNumbers).toFixed(5)} segundos!</p>`;
   document.getElementById('resultado-texto').innerHTML = resultadoTexto;
 }
 
@@ -91,9 +147,16 @@ function mouseClicked() {
     // Verifica se o mouse está dentro do círculo quando é clicado
     let d = dist(mouseX, mouseY, circleX, circleY);
     if (d < circleSize / 2) {
+       // Gera um número aleatório entre 0 e 1
+    let randomNumber = Math.random();
+    // Multiplica o número aleatório por 3 para obter um número entre 0 e 3
+    // e adiciona 1 para garantir que o número final esteja entre 1 e 3
+    let resultado = Math.floor(randomNumber * 4) + 1;
+      console.log(resultado);
       if (circlesNumber == 0) {
         return;
       }
+      corAtual = resultado;
       let clickTime = performance.now(); // Registra o tempo atual em milissegundos com alta precisão
       let elapsedTime = (clickTime - circleCreationTime) / 1000; // Calcula o tempo decorrido em segundos
       
@@ -105,6 +168,13 @@ function mouseClicked() {
 }
 
 function createCircle() {
+  if (circlesNumber == 0) {
+        return;
+      }
+      let randomNumber = Math.random();
+      let resultado = Math.floor(randomNumber * 4) + 1;
+      corAtual = resultado;
+      circlesNumber--;
   // Define a posição inicial do círculo aleatoriamente dentro do canvas
   if (circlesNumber == 0) {
     startButton.removeAttribute('disabled');
@@ -114,5 +184,6 @@ function createCircle() {
   }
   circleX = random(circleSize, width - circleSize);
   circleY = random(circleSize, height - circleSize);
+  //fill(cores[corAtual]);
   circleCreationTime = performance.now(); // Registra o momento em que o círculo foi criado com alta precisão
 }
