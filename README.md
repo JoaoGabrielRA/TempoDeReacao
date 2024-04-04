@@ -30,3 +30,8 @@ Basta abrir o arquivo `index.html` em um navegador da web para iniciar o jogo.
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
+
+## Link da breve apresentação do trabalho
+https://www.loom.com/share/73334b6818c04956b9242dbc87482ea3
+
+
